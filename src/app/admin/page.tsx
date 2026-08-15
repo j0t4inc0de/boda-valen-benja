@@ -207,7 +207,9 @@ export default function AdminDashboard() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...settings,
-          weddingDate: new Date(settings.weddingDate).toISOString(),
+          weddingDate: settings.weddingDate && !isNaN(new Date(settings.weddingDate).getTime())
+            ? new Date(settings.weddingDate).toISOString()
+            : undefined,
         }),
       });
 
@@ -522,7 +524,6 @@ export default function AdminDashboard() {
                     type="text"
                     id="names"
                     name="names"
-                    required
                     value={settings.names}
                     onChange={handleInputChange}
                     placeholder="Ej: Valentina & Benjamín"
@@ -537,7 +538,6 @@ export default function AdminDashboard() {
                     type="datetime-local"
                     id="weddingDate"
                     name="weddingDate"
-                    required
                     value={settings.weddingDate}
                     onChange={handleInputChange}
                     className="border border-gray-200 rounded-lg p-2.5 text-xs font-sans focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold transition-all"
@@ -566,7 +566,6 @@ export default function AdminDashboard() {
                     type="text"
                     id="heroBg"
                     name="heroBg"
-                    required
                     value={settings.heroBg}
                     onChange={handleInputChange}
                     placeholder="URL o ruta de la imagen"
@@ -599,7 +598,6 @@ export default function AdminDashboard() {
                     type="text"
                     id="musicUrl"
                     name="musicUrl"
-                    required
                     value={settings.musicUrl}
                     onChange={handleInputChange}
                     placeholder="URL o ruta del archivo MP3"
@@ -625,7 +623,6 @@ export default function AdminDashboard() {
                   type="text"
                   id="introTitle"
                   name="introTitle"
-                  required
                   value={settings.introTitle}
                   onChange={handleInputChange}
                   placeholder="Ej: Nos casamos"
@@ -639,7 +636,6 @@ export default function AdminDashboard() {
                 <textarea
                   id="introText"
                   name="introText"
-                  required
                   rows={3}
                   value={settings.introText}
                   onChange={handleInputChange}
@@ -663,7 +659,6 @@ export default function AdminDashboard() {
                     type="text"
                     id="hotelName"
                     name="hotelName"
-                    required
                     value={settings.hotelName}
                     onChange={handleInputChange}
                     placeholder="Ej: Hotel Boutique Cabernet"
@@ -678,7 +673,6 @@ export default function AdminDashboard() {
                     type="text"
                     id="address"
                     name="address"
-                    required
                     value={settings.address}
                     onChange={handleInputChange}
                     placeholder="Ej: Héctor Calvo 380, Cerro Bellavista, Valparaíso"
@@ -695,7 +689,6 @@ export default function AdminDashboard() {
                     type="url"
                     id="mapUrl"
                     name="mapUrl"
-                    required
                     value={settings.mapUrl}
                     onChange={handleInputChange}
                     placeholder="https://maps.app.goo.gl/..."
@@ -721,7 +714,6 @@ export default function AdminDashboard() {
                     type="text"
                     id="mapImage"
                     name="mapImage"
-                    required
                     value={settings.mapImage}
                     onChange={handleInputChange}
                     placeholder="URL o ruta de la foto"
@@ -749,7 +741,6 @@ export default function AdminDashboard() {
                   type="text"
                   id="dressCode"
                   name="dressCode"
-                  required
                   value={settings.dressCode}
                   onChange={handleInputChange}
                   placeholder="Ej: Semi formal"
@@ -770,7 +761,6 @@ export default function AdminDashboard() {
                 <textarea
                   id="giftText"
                   name="giftText"
-                  required
                   rows={3}
                   value={settings.giftText}
                   onChange={handleInputChange}
@@ -787,7 +777,6 @@ export default function AdminDashboard() {
                     type="text"
                     id="bankName"
                     name="bankName"
-                    required
                     value={settings.bankName}
                     onChange={handleInputChange}
                     placeholder="Ej: Banco de Chile"
@@ -802,7 +791,6 @@ export default function AdminDashboard() {
                     type="text"
                     id="bankAccountType"
                     name="bankAccountType"
-                    required
                     value={settings.bankAccountType}
                     onChange={handleInputChange}
                     placeholder="Ej: Cuenta Corriente"
@@ -817,7 +805,6 @@ export default function AdminDashboard() {
                     type="text"
                     id="bankAccountNumber"
                     name="bankAccountNumber"
-                    required
                     value={settings.bankAccountNumber}
                     onChange={handleInputChange}
                     placeholder="Ej: 123-45678-90"
@@ -834,7 +821,6 @@ export default function AdminDashboard() {
                     type="text"
                     id="bankAccountOwner"
                     name="bankAccountOwner"
-                    required
                     value={settings.bankAccountOwner}
                     onChange={handleInputChange}
                     placeholder="Ej: Valentina & Benjamín"
@@ -849,7 +835,6 @@ export default function AdminDashboard() {
                     type="text"
                     id="bankAccountRut"
                     name="bankAccountRut"
-                    required
                     value={settings.bankAccountRut}
                     onChange={handleInputChange}
                     placeholder="Ej: 12.345.678-9"
@@ -864,7 +849,6 @@ export default function AdminDashboard() {
                     type="email"
                     id="bankAccountEmail"
                     name="bankAccountEmail"
-                    required
                     value={settings.bankAccountEmail}
                     onChange={handleInputChange}
                     placeholder="Ej: correo@ejemplo.com"
@@ -886,7 +870,6 @@ export default function AdminDashboard() {
                 <textarea
                   id="footerText"
                   name="footerText"
-                  required
                   rows={3}
                   value={settings.footerText}
                   onChange={handleInputChange}
