@@ -33,8 +33,9 @@ CREATE TABLE "Settings" (
 CREATE TABLE "Guest" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
-    "phone" TEXT NOT NULL,
+    "rut" TEXT NOT NULL DEFAULT '',
+    "email" TEXT NOT NULL DEFAULT '',
+    "phone" TEXT NOT NULL DEFAULT '',
     "isAttending" BOOLEAN NOT NULL,
     "companionsCount" INTEGER NOT NULL DEFAULT 0,
     "companionsNames" TEXT NOT NULL DEFAULT '',
