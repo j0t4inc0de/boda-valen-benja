@@ -733,7 +733,7 @@ Correo: ${settings.bankAccountEmail}
             {/* Créditos de We Are Samod */}
             <div className="flex flex-col items-center gap-2 mt-8 pt-8 border-t border-gold-light/10 w-full">
               <p className="text-[10px] text-cream-light/60 tracking-[0.2em] uppercase font-sans">
-                PÁGINA HECHA CON CARIÑO POR <span className="text-gold-light font-medium">WE ARE SAMOD</span>
+                PÁGINA HECHA CON CARIÑO POR <a href="https://wearesamod.com" target="_blank" rel="noopener noreferrer" className="text-gold-light font-medium hover:underline">WE ARE SAMOD</a>
               </p>
               <a 
                 href="https://www.linkedin.com/in/juan-erices-fuentealba-628b4a27a/" 
