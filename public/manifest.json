@@ -1,0 +1,9 @@
+{
+  "name": "Boda Valentina & Benjamín",
+  "short_name": "Boda V&B",
+  "description": "Confirmación de asistencia - Matrimonio Valentina & Benjamín",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fdfbf7",
+  "theme_color": "#c5a880"
+}
