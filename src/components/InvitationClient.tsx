@@ -15,7 +15,8 @@ import {
   Check, 
   Clock,
   Compass,
-  Shirt
+  Shirt,
+  Linkedin
 } from "lucide-react";
 import confetti from "canvas-confetti";
 
@@ -726,9 +727,25 @@ Correo: ${settings.bankAccountEmail}
               "{settings.footerText}"
             </p>
             <div className="w-8 h-[1px] bg-gold my-2" />
-            <h4 className="text-2xl sm:text-3xl font-serif text-cream-light font-light tracking-widest uppercase mt-4">
+            <h4 className="text-2xl sm:text-3xl font-serif text-cream-light font-light tracking-widest uppercase mt-4 mb-16">
               Con Cariño, {partner1} & {partner2}
             </h4>
+
+            {/* Créditos de We Are Samod */}
+            <div className="flex flex-col items-center gap-2 mt-8 pt-8 border-t border-gold-light/10 w-full">
+              <p className="text-[10px] text-cream-light/60 tracking-[0.2em] uppercase font-sans">
+                PÁGINA HECHA CON CARIÑO POR <span className="text-gold-light font-medium">WE ARE SAMOD</span>
+              </p>
+              <a 
+                href="https://www.linkedin.com/in/juan-erices-fuentealba-628b4a27a/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-cream-light/50 hover:text-gold transition-colors duration-300 p-2"
+                aria-label="LinkedIn de Juan Erices"
+              >
+                <Linkedin className="h-4 w-4" />
+              </a>
+            </div>
           </div>
         </footer>
       </div>
