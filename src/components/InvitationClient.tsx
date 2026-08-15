@@ -311,7 +311,7 @@ Correo: ${settings.bankAccountEmail}
             transition={{ duration: 1.2, delay: 0.2 }}
             className="text-white text-xs md:text-sm uppercase tracking-[0.3em] font-sans font-medium mb-6 text-gold-light"
           >
-            Nuestra Boda
+            Nuestra Unión Civil
           </motion.p>
           
           <motion.div
