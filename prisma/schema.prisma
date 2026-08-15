@@ -1,0 +1,50 @@
+datasource db {
+  provider = "sqlite"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Admin {
+  id       Int    @id @default(autoincrement())
+  username String @unique
+  password String
+}
+
+model Settings {
+  id                 Int      @id @default(1)
+  names              String   @default("Valentina & Benjamín")
+  musicUrl           String   @default("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3") // Música por defecto
+  heroBg             String   @default("https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070") // Foto de boda por defecto
+  introTitle         String   @default("Nos casamos")
+  introText          String   @default("Con mucha alegría queremos invitarlos a ser parte de uno de los días mas importantes de nuestras vidas.")
+  weddingDate        DateTime @default("2026-09-12T08:00:00Z")
+  mapImage           String   @default("https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2074") // Imagen por defecto de Valparaíso
+  address            String   @default("Héctor Calvo 380, Cerro Bellavista, Valparaíso")
+  hotelName          String   @default("Hotel Boutique Cabernet")
+  mapUrl             String   @default("https://maps.app.goo.gl/d279EPkFbn2TvADs9")
+  dressCode          String   @default("Semi formal")
+  giftText           String   @default("Lo más importante para nosotros es contar con su presencia y compartir juntos este día tan especial. Sin embargo, si desean hacernos un regalo, agradeceremos su cariño a través de la siguiente cuenta:")
+  bankName           String   @default("Banco de Chile")
+  bankAccountType    String   @default("Cuenta Corriente")
+  bankAccountNumber  String   @default("123-45678-90")
+  bankAccountOwner   String   @default("Valentina & Benjamín")
+  bankAccountRut     String   @default("12.345.678-9")
+  bankAccountEmail   String   @default("valentina.benjamin@matrimonio.cl")
+  footerText         String   @default("Muchas gracias por acompañarnos en este momento tan importante de nuestras vidas.")
+}
+
+model Guest {
+  id                  Int      @id @default(autoincrement())
+  name                String
+  rut                 String   @default("")
+  email               String   @default("")
+  phone               String   @default("")
+  isAttending         Boolean
+  companionsCount     Int      @default(0)
+  companionsNames     String   @default("")
+  dietaryRestrictions String   @default("")
+  message             String   @default("")
+  createdAt           DateTime @default(now())
+}
