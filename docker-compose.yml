@@ -1,12 +1,10 @@
 services:
-  boda-app:
+  boda-valen-benja:
+    build: .
     container_name: boda-valen-benja
-    build:
-      context: .
-      dockerfile: Dockerfile
-    restart: unless-stopped
-    ports:
-      - "3008:3000"
+    restart: always
+    expose:
+      - "3000"
     environment:
       - NODE_ENV=production
       - DATABASE_URL=file:/app/data/dev.db
@@ -14,3 +12,9 @@ services:
     volumes:
       - ./data:/app/data
       - ./uploads:/app/public/uploads
+    networks:
+      - proxy_network
+
+networks:
+  proxy_network:
+    external: true
