@@ -562,9 +562,9 @@ Correo: ${settings.bankAccountEmail}
               Confirmar Asistencia
             </h3>
             <p className="text-xs text-olive-light font-sans tracking-wide text-center mb-1 mt-2">
-              Por favor completa el formulario <span href="" className="font-semibold"> antes del 31 de Agosto</span>.
+              Por favor completa el formulario <span className="font-semibold"> antes del 31 de Agosto</span>.
             </p>
-            <p className="text-xs text-olive-light font-sans tracking-wide text-center mb-4">Recuerda que esta celebración es para <span href="" className="underline text-red-500 font-semibold">mayores de 18 años</span> .</p>
+            <p className="text-xs text-olive-light font-sans tracking-wide text-center mb-4">Recuerda que esta celebración es para <span className="underline text-red-500 font-semibold">mayores de 18 años</span>.</p>
 
             <AnimatePresence mode="wait">
               {submitSuccess ? (
