@@ -485,7 +485,7 @@ Correo: ${settings.bankAccountEmail}
               {settings.dressCode}
             </p>
             <p className="text-xs text-cream-light/75 font-sans mt-3 font-light max-w-sm">
-              Tu presencia y comodidad son lo más importante. Vístete elegante para celebrar con nosotros.
+              Tu presencia y comodidad son lo más importante. Vístete cómodo para celebrar con nosotros.
             </p>
           </div>
         </section>
