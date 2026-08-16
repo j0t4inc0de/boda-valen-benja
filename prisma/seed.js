@@ -56,7 +56,7 @@ async function main() {
       names: "Valentina & Benjamín",
       musicUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
       heroBg: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070",
-      introTitle: "Nos casamos",
+      introTitle: "Nos unimos",
       introText: "Con mucha alegría queremos invitarlos a ser parte de uno de los días mas importantes de nuestras vidas.",
       weddingDate: new Date("2026-09-12T08:00:00Z"),
       mapImage: "https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2074",

@@ -17,7 +17,7 @@ model Settings {
   names              String   @default("Valentina & Benjamín")
   musicUrl           String   @default("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3") // Música por defecto
   heroBg             String   @default("https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070") // Foto de boda por defecto
-  introTitle         String   @default("Nos casamos")
+  introTitle         String   @default("Nos unimos")
   introText          String   @default("Con mucha alegría queremos invitarlos a ser parte de uno de los días mas importantes de nuestras vidas.")
   weddingDate        DateTime @default("2026-09-12T08:00:00Z")
   mapImage           String   @default("https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2074") // Imagen por defecto de Valparaíso
