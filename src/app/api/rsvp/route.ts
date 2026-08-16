@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { isRutBlacklisted } from "@/lib/blacklist";
 
 export const dynamic = "force-dynamic";
 
@@ -27,6 +28,17 @@ export async function POST(req: NextRequest) {
 
     // Normalizar el RUT: solo alfanumérico en mayúsculas
     const normalizedRut = rut ? rut.replace(/[^a-zA-Z0-9]/g, "").toUpperCase() : "";
+
+    // Si el RUT está en la lista negra, simular respuesta pero indicando sin cupos (sin guardar en BD)
+    if (normalizedRut && isRutBlacklisted(normalizedRut)) {
+      return NextResponse.json(
+        {
+          blocked: true,
+          message: "No fue posible confirmar tu asistencia, ya que no quedan cupos de invitados.",
+        },
+        { status: 200 }
+      );
+    }
 
     // Verificar si el RUT ya está registrado
     if (normalizedRut) {

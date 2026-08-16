@@ -63,6 +63,7 @@ export default function InvitationClient({ settings }: InvitationClientProps) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [isBlocked, setIsBlocked] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
   // Countdown state
@@ -230,11 +231,19 @@ Correo: ${settings.bankAccountEmail}
         }),
       });
 
+      const responseData = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Ocurrió un error al enviar el formulario.");
+        throw new Error(responseData.error || "Ocurrió un error al enviar el formulario.");
       }
 
+      if (responseData.blocked) {
+        setIsBlocked(true);
+        setSubmitSuccess(true);
+        return;
+      }
+
+      setIsBlocked(false);
       setSubmitSuccess(true);
       
       // Lanzar confeti si el invitado asistirá
@@ -574,16 +583,31 @@ Correo: ${settings.bankAccountEmail}
                   exit={{ opacity: 0 }}
                   className="bg-white border border-gold-light/40 p-8 rounded-2xl shadow-md w-full text-center flex flex-col items-center"
                 >
-                  <CheckCircle className="h-16 w-16 text-gold mb-4 animate-bounce" />
-                  <h4 className="text-xl font-serif text-olive mb-2 font-medium">¡Muchas Gracias!</h4>
-                  <p className="text-sm text-olive-light font-sans leading-relaxed mb-6">
-                    {formData.isAttending === "true" 
-                      ? "Tu confirmación de asistencia ha sido registrada exitosamente. ¡Nos vemos en nuestro gran día!"
-                      : "Gracias por notificarnos. Lamentamos que no puedas acompañarnos, te extrañaremos."}
-                  </p>
+                  {isBlocked ? (
+                    <>
+                      <div className="w-16 h-16 rounded-full bg-cream-dark border border-gold-light/40 flex items-center justify-center mb-4 text-gold shadow-inner">
+                        <Heart className="h-8 w-8 text-gold animate-pulse" />
+                      </div>
+                      <h4 className="text-xl font-serif text-olive mb-2 font-medium">Aviso de Capacidad</h4>
+                      <p className="text-sm text-olive-light font-sans leading-relaxed mb-6">
+                        No fue posible confirmar tu asistencia, ya que no quedan cupos de invitados.
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <CheckCircle className="h-16 w-16 text-gold mb-4 animate-bounce" />
+                      <h4 className="text-xl font-serif text-olive mb-2 font-medium">¡Muchas Gracias!</h4>
+                      <p className="text-sm text-olive-light font-sans leading-relaxed mb-6">
+                        {formData.isAttending === "true" 
+                          ? "Tu confirmación de asistencia ha sido registrada exitosamente. ¡Nos vemos en nuestro gran día!"
+                          : "Gracias por notificarnos. Lamentamos que no puedas acompañarnos, te extrañaremos."}
+                      </p>
+                    </>
+                  )}
                   <button
                     onClick={() => {
                       setSubmitSuccess(false);
+                      setIsBlocked(false);
                       setFormData({
                         name: "",
                         rut: "",
