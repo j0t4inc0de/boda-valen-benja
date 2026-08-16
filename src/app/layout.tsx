@@ -18,7 +18,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "Valentina & Benjamín",
-  description: "¡Nos casamos! Acompáñanos a celebrar nuestra unión el 12 de septiembre de 2026. Confirma tu asistencia aquí.",
+  description: "Acompáñanos a celebrar nuestra unión el 12 de septiembre de 2026. Confirma tu asistencia aquí.",
 };
 
 export const viewport = {
