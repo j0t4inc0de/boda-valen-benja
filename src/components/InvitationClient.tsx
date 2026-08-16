@@ -562,7 +562,7 @@ Correo: ${settings.bankAccountEmail}
               Confirmar Asistencia
             </h3>
             <p className="text-xs text-olive-light font-sans tracking-wide text-center mb-8">
-              Por favor completa el formulario antes de la fecha límite
+              Por favor completa el formulario antes del 31 de Agosto
             </p>
 
             <AnimatePresence mode="wait">
@@ -645,7 +645,7 @@ Correo: ${settings.bankAccountEmail}
                   {/* Confirmar Asistencia */}
                   <div className="flex flex-col gap-2">
                     <label className="text-xs uppercase tracking-wider text-olive font-semibold font-sans mb-1">
-                      ¿Asistirás a la boda? *
+                      ¿Asistirás a la fiesta? *
                     </label>
                     <div className="grid grid-cols-2 gap-4">
                       <label className={`flex items-center justify-center p-3 rounded-lg border cursor-pointer font-sans text-sm transition-all duration-200 ${
@@ -687,7 +687,7 @@ Correo: ${settings.bankAccountEmail}
                   {/* Mensaje */}
                   <div className="flex flex-col gap-2">
                     <label htmlFor="message" className="text-xs uppercase tracking-wider text-olive font-semibold font-sans">
-                      Mensaje para los novios
+                      Mensaje para la pareja
                     </label>
                     <textarea
                       id="message"
