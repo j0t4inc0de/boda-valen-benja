@@ -15,7 +15,9 @@ import {
   Heart,
   Upload,
   Music,
-  Image as ImageIcon
+  Image as ImageIcon,
+  MessageSquare,
+  X
 } from "lucide-react";
 
 interface Guest {
@@ -88,6 +90,7 @@ export default function AdminDashboard() {
   const [saveError, setSaveError] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedMessageGuest, setSelectedMessageGuest] = useState<Guest | null>(null);
 
   // Upload states
   const [uploadingField, setUploadingField] = useState<string | null>(null);
@@ -441,8 +444,32 @@ export default function AdminDashboard() {
                               </span>
                             )}
                           </td>
-                          <td className="py-4 px-6 max-w-xs truncate" title={guest.message}>
-                            {guest.message || <span className="text-gray-300 italic">Sin mensaje</span>}
+                          <td className="py-4 px-6 max-w-xs">
+                            {guest.message ? (
+                              <div className="space-y-1">
+                                <p 
+                                  className={`text-gray-600 line-clamp-2 break-words ${guest.message.length > 50 ? 'cursor-pointer hover:text-olive' : ''}`}
+                                  title={guest.message}
+                                  onClick={() => {
+                                    if (guest.message.length > 50) setSelectedMessageGuest(guest);
+                                  }}
+                                >
+                                  "{guest.message}"
+                                </p>
+                                {guest.message.length > 50 && (
+                                  <button
+                                    type="button"
+                                    onClick={() => setSelectedMessageGuest(guest)}
+                                    className="text-[11px] text-gold hover:text-gold-dark font-medium underline flex items-center gap-1 cursor-pointer transition-colors"
+                                  >
+                                    <MessageSquare className="h-3 w-3 inline" />
+                                    <span>Ver mensaje completo</span>
+                                  </button>
+                                )}
+                              </div>
+                            ) : (
+                              <span className="text-gray-300 italic">Sin mensaje</span>
+                            )}
                           </td>
                           <td className="py-4 px-6 text-gray-400 font-mono">
                             {new Date(guest.createdAt).toLocaleString("es-CL").slice(0, -3)}
@@ -899,6 +926,70 @@ export default function AdminDashboard() {
           </form>
         )}
       </main>
+
+      {/* Modal de Lectura de Mensaje Completo */}
+      {selectedMessageGuest && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4"
+          onClick={() => setSelectedMessageGuest(null)}
+        >
+          <div 
+            className="bg-white rounded-2xl shadow-xl max-w-lg w-full p-6 md:p-8 relative text-left border border-gold-light/40"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setSelectedMessageGuest(null)}
+              className="absolute top-4 right-4 p-1.5 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors cursor-pointer"
+              aria-label="Cerrar"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            <div className="flex items-center gap-2 mb-4">
+              <Heart className="h-5 w-5 text-gold" />
+              <h4 className="text-base font-serif font-semibold text-olive">
+                Mensaje para los Novios
+              </h4>
+            </div>
+
+            <div className="bg-[#fdfbf7] p-5 rounded-xl border border-gold-light/30 mb-6 space-y-3">
+              <div className="flex justify-between items-start gap-2 border-b border-gold-light/20 pb-3">
+                <div>
+                  <span className="font-semibold text-olive block text-sm">{selectedMessageGuest.name}</span>
+                  {selectedMessageGuest.rut && (
+                    <span className="text-gray-400 font-mono text-xs">RUT: {selectedMessageGuest.rut}</span>
+                  )}
+                </div>
+                <span className={`px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider ${
+                  selectedMessageGuest.isAttending ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"
+                }`}>
+                  {selectedMessageGuest.isAttending ? "Asiste" : "No asiste"}
+                </span>
+              </div>
+
+              <div className="max-h-60 overflow-y-auto pr-1">
+                <p className="text-xs sm:text-sm text-gray-700 leading-relaxed font-sans italic whitespace-pre-wrap">
+                  "{selectedMessageGuest.message}"
+                </p>
+              </div>
+
+              <div className="pt-2 text-right border-t border-gold-light/10 text-[10px] text-gray-400 font-mono">
+                Registrado el {new Date(selectedMessageGuest.createdAt).toLocaleString("es-CL")}
+              </div>
+            </div>
+
+            <div className="flex justify-end">
+              <button
+                type="button"
+                onClick={() => setSelectedMessageGuest(null)}
+                className="bg-olive hover:bg-olive-light text-white text-xs font-medium py-2.5 px-6 rounded-lg transition-colors cursor-pointer shadow-sm"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

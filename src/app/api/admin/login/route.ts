@@ -17,9 +17,21 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const admin = await prisma.admin.findUnique({
-      where: { username },
+    const cleanUsername = username.trim();
+    const cleanPassword = password.trim();
+
+    // Buscar admin por coincidencia exacta o en minúsculas
+    let admin = await prisma.admin.findUnique({
+      where: { username: cleanUsername },
     });
+
+    if (!admin) {
+      admin = await prisma.admin.findFirst({
+        where: {
+          username: cleanUsername.toLowerCase(),
+        },
+      });
+    }
 
     if (!admin) {
       return NextResponse.json(
@@ -28,7 +40,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const passwordMatch = await bcrypt.compare(password, admin.password);
+    let passwordMatch = await bcrypt.compare(password, admin.password);
+    if (!passwordMatch && cleanPassword !== password) {
+      passwordMatch = await bcrypt.compare(cleanPassword, admin.password);
+    }
+
     if (!passwordMatch) {
       return NextResponse.json(
         { error: "Credenciales inválidas" },
